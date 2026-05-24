@@ -1,41 +1,32 @@
 const express = require('express');
 const router = express.Router();
+const c = require('../controllers/clienteController');
 
-const pool = require('../config/db');
-const bcrypt = require('bcrypt');
+// Cadastro
+router.get('/cadastro/cliente',  c.exibirCadastro);
+router.post('/cadastro/cliente', c.cadastrar);
 
-// ABRIR PÁGINA
-router.get('/cadastro/cliente', (req, res) => {
-  res.render('cadastro_cliente');
-});
+// Dashboard
+router.get('/cliente/dashboard_cliente', c.dashboard);
 
-// CADASTRAR
-router.post('/cadastro/cliente', async (req, res) => {
-  const { nome, email, senha, confirmarSenha } = req.body;
+// Perfil
+router.get('/cliente/perfil',            c.exibirPerfil);
+router.post('/cliente/perfil/atualizar', c.atualizarPerfil);
+router.post('/cliente/perfil/senha',     c.atualizarSenha);
 
-  if (senha !== confirmarSenha) {
-    return res.send('Senhas não coincidem');
-  }
+// Agendamento
+router.get('/cliente/agendar',               c.exibirAgendar);
+router.get('/cliente/buscar-barbearia',      c.buscarBarbearia);
+router.get('/cliente/servicos/:barbeiro_id', c.buscarServicos);
+router.get('/cliente/horarios/:barbeiro_id', c.buscarHorarios);
+router.post('/cliente/agendar',              c.confirmarAgendamento);
+router.get('/cliente/confirmacao/:id',       c.exibirConfirmacao);
 
-  try {
-    const senhaHash = await bcrypt.hash(senha, 10);
-
-    const usuario = await pool.query(
-      'INSERT INTO usuarios (nome, email, senha, tipo) VALUES ($1, $2, $3, $4) RETURNING id',
-      [nome, email, senhaHash, 'cliente']
-    );
-
-    await pool.query(
-      'INSERT INTO clientes (usuario_id) VALUES ($1)',
-      [usuario.rows[0].id]
-    );
-
-    res.redirect('/login');
-
-  } catch (err) {
-    console.error(err);
-    res.send('Erro ao cadastrar cliente');
-  }
+// Tutorial
+router.get('/cliente/tutorial', (req, res) => {
+    if (!req.session.user || req.session.user.tipo !== 'cliente')
+        return res.redirect('/login');
+    res.render('cliente/tutorial_cliente');
 });
 
 module.exports = router;

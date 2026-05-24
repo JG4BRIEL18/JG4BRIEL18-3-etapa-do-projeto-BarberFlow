@@ -1,57 +1,41 @@
 const express = require('express');
 const router = express.Router();
+const c = require('../controllers/barbeiroController');
 
-const pool = require('../config/db');
-const bcrypt = require('bcrypt');
+// Cadastro
+router.get('/cadastro/barbeiro',  c.exibirCadastro);
+router.post('/cadastro/barbeiro', c.cadastrar);
 
-// ABRIR PÁGINA DE CADASTRO
-router.get('/cadastro/barbeiro', (req, res) => {
-  res.render('cadastro_barbeiro');
-});
+// Dashboard
+router.get('/barbeiro/dashboard_barb', c.dashboard);
 
-// CADASTRAR
-router.post('/cadastro/barbeiro', async (req, res) => {
-  console.log('Dados recebidos:', req.body);
-  const { nome, barbearia, endereco, email, senha, confirmarSenha } = req.body;
+// Perfil
+router.get('/barbeiro/perfil',            c.exibirPerfil);
+router.post('/barbeiro/perfil/atualizar', c.atualizarPerfil);
+router.post('/barbeiro/perfil/senha',     c.atualizarSenha);
 
-  if (senha !== confirmarSenha) {
-    return res.send('Senhas não coincidem');
-  }
+// Serviços
+router.get('/barbeiro/servicos',               c.exibirServicos);
+router.post('/barbeiro/servicos/adicionar',    c.adicionarServico);
+router.post('/barbeiro/servicos/editar/:id',   c.editarServico);
+router.post('/barbeiro/servicos/remover/:id',  c.removerServico);
 
-  try {
-    const senhaHash = await bcrypt.hash(senha, 10);
+// Horários
+router.post('/barbeiro/horarios/adicionar',   c.adicionarHorario);
+router.post('/barbeiro/horarios/editar/:id',  c.editarHorario);
 
-    const usuario = await pool.query(
-      'INSERT INTO usuarios (nome, email, senha, tipo) VALUES ($1, $2, $3, $4) RETURNING id',
-      [nome, email, senhaHash, 'barbeiro']
-    );
+// Agenda
+router.get('/barbeiro/agenda',                    c.exibirAgenda);
+router.post('/barbeiro/agenda/confirmar/:id',     c.confirmarAgendamento);
+router.post('/barbeiro/agenda/cancelar/:id',      c.cancelarAgendamento);
+router.post('/barbeiro/agenda/concluir/:id',      c.concluirAgendamento);
+router.post('/barbeiro/agenda/remarcar/:id',      c.remarcarAgendamento);
 
-    await pool.query(
-      'INSERT INTO barbeiros (usuario_id, barbearia, endereco) VALUES ($1, $2, $3)',
-      [usuario.rows[0].id, barbearia, endereco]
-    );
-
-    res.redirect('/login');
-
-  } catch (err) {
-    console.error(err);
-    res.send('Erro ao cadastrar barbeiro');
-  }
-});
-
-// DASHBOARD
-router.get('/barbeiro/dashboard_barb', (req, res) => {
-  res.render('barbeiro/dashboard_barb');
-});
-
-// AGENDA
-router.get('/barbeiro/agenda', (req, res) => {
-  res.render('barbeiro/agenda');
-});
-
-// SERVIÇOS
-router.get('/barbeiro/servicos', (req, res) => {
-  res.render('barbeiro/servicos');
+// Tutorial
+router.get('/barbeiro/tutorial', (req, res) => {
+    if (!req.session.user || req.session.user.tipo !== 'barbeiro')
+        return res.redirect('/login');
+    res.render('barbeiro/tutorial_barb');
 });
 
 module.exports = router;

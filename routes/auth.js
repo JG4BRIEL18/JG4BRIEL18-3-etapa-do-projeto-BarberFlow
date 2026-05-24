@@ -1,62 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const c = require('../controllers/authController');
+const s = require('../controllers/senhaController');
 
-const pool = require('../config/db');
-const bcrypt = require('bcrypt');
+// Login
+router.get('/login',  c.exibirLogin);
+router.post('/login', c.login);
 
-// PÁGINA LOGIN
+// Logout
+router.get('/logout', c.logout);
 
-router.get('/login', (req, res) => {
-  res.render('login');
-});
+// Excluir conta
+router.post('/excluir-conta', c.excluirConta);
 
-// LOGIN 
+// Esqueci senha
+router.get('/esqueci-senha',   s.exibirEsqueciSenha);
+router.post('/esqueci-senha',  s.enviarLink);
+router.get('/redefinir-senha', s.exibirRedefinirSenha);
+router.post('/redefinir-senha', s.redefinirSenha);
 
-router.post('/login', async (req, res) => {
-  const { email, senha } = req.body;
-
-  try {
-    if (!email || !senha) {
-      return res.send('Preencha todos os campos');
-    }
-
-    const result = await pool.query(
-      'SELECT * FROM usuarios WHERE email = $1',
-      [email]
-    );
-
-    if (result.rows.length === 0) {
-      return res.send('Usuário não encontrado');
-    }
-
-    const user = result.rows[0];
-
-    const senhaValida = await bcrypt.compare(senha, user.senha);
-
-    if (!senhaValida) {
-      return res.send('Senha incorreta');
-    }
-
-    req.session.user = {
-      id: user.id,
-      nome: user.nome,
-      tipo: user.tipo
-    };
-
-    if (user.tipo === 'cliente') {
-      return res.redirect('/cliente/dashboard');
-    }
-
-    if (user.tipo === 'barbeiro') {
-      return res.redirect('/barbeiro/dashboard_barb');
-    }
-
-    return res.redirect('/');
-
-  } catch (err) {
-    console.error('Erro no login:', err);
-    return res.send('Erro interno no servidor');
-  }
-});
+// Páginas comuns
+router.get('/comum/configuracoes',  c.configuracoes);
+router.get('/comum/termos',         c.termos);
+router.get('/comum/privacidade',    c.privacidade);
+router.get('/comum/acessibilidade', c.acessibilidade);
+router.get('/comum/suporte',        c.suporte);
 
 module.exports = router;

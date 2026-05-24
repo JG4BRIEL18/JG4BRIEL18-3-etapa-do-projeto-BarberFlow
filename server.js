@@ -13,9 +13,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-  secret: 'barberflow_secret',
+  secret: process.env.SESSION_SECRET || 'barberflow_secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 2
+  }
 }));
 
 // =============================
@@ -46,6 +51,13 @@ app.get('/', (req, res) => {
 
 app.get('/cadastro', (req, res) => {
   res.render('cadastro');
+});
+
+// =============================
+// PÁGINA NÃO ENCONTRADA
+// =============================
+app.use((req, res) => {
+  res.status(404).send('Página não encontrada');
 });
 
 // =============================

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <%- include('../partials/navbar_cliente') %>
+
+    <main aria-label="Conteúdo principal da confirmação">
+
+        <!-- Título -->
+        <section aria-labelledby="titulo-confirmacao">
+            <h2 id="titulo-confirmacao">Agendamento Confirmado!</h2>
+            <p>Seu agendamento foi realizado com sucesso. Confira os detalhes abaixo.</p>
+        </section>
+
+        <!-- Detalhes do agendamento -->
+        <section aria-labelledby="titulo-detalhes">
+            <h2 id="titulo-detalhes">Detalhes do Agendamento</h2>
+
+            <div class="form-container">
+                <p>Barbearia: <strong><%= agendamento.barbearia %></strong></p>
+                <p>Endereço: <strong><%= agendamento.endereco %></strong></p>
+                <p>Barbeiro: <strong><%= agendamento.barbeiro %></strong></p>
+                <p>Serviço: <strong><%= agendamento.servico %></strong></p>
+                <p>Preço: <strong>R$ <%= Number(agendamento.preco).toFixed(2) %></strong></p>
+                <p>Data: <strong><%= new Date(agendamento.data_agendamento).toLocaleDateString('pt-BR') %></strong></p>
+                <p>Horário: <strong><%= agendamento.hora_agendamento %></strong></p>
+                <p>Status: <strong><%= agendamento.status %></strong></p>
+                <p>Pagamento: <strong><%= agendamento.pagamento %></strong></p>
+            </div>
+        </section>
+
+        <!-- Ações -->
+        <section aria-labelledby="titulo-acoes">
+            <h2 id="titulo-acoes">O que deseja fazer agora?</h2>
+
+            <a href="/cliente/dashboard_cliente" class="botao" aria-label="Voltar para o dashboard">Voltar para o Dashboard</a>
+            <a href="/cliente/agendar" class="botao" aria-label="Fazer um novo agendamento">Novo Agendamento</a>
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

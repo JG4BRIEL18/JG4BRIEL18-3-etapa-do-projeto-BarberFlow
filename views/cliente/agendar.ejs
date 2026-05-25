@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <%- include('../partials/navbar_cliente') %>
+
+    <main aria-label="Conteúdo principal do agendamento">
+
+        <!-- Voltar -->
+
+        <button
+            class="botao"
+            type="button"
+            onclick="history.back()"
+            aria-label="Voltar para página anterior"
+        >
+            Voltar
+        </button>
+
+        <!-- Mensagem de erro -->
+
+        <% if (erro) { %>
+            <p class="mensagem-erro"><%= erro %></p>
+        <% } %>
+
+        <!-- Mensagem de sucesso -->
+
+        <% if (sucesso) { %>
+            <p class="mensagem-sucesso"><%= sucesso %></p>
+        <% } %>
+
+        <!-- Título -->
+
+        <section aria-labelledby="titulo-agendar">
+
+            <h2 id="titulo-agendar">
+                Agendar Corte
+            </h2>
+
+            <p>
+                Busque uma barbearia e siga as etapas para concluir seu agendamento.
+            </p>
+
+        </section>
+
+        <!-- Etapa 1: Buscar barbearia -->
+
+        <section aria-labelledby="titulo-busca">
+
+            <h2 id="titulo-busca">
+                Etapa 1: Buscar Barbearia
+            </h2>
+
+            <div class="form-container">
+
+                <label for="busca-barbearia">
+                    Nome da barbearia
+                </label>
+
+                <input
+                    type="text"
+                    id="busca-barbearia"
+                    placeholder="Ex: Barbearia do João"
+                    aria-label="Digite o nome da barbearia"
+                >
+
+                <button
+                    type="button"
+                    id="btn-buscar"
+                    aria-label="Buscar barbearia"
+                >
+                    Buscar
+                </button>
+
+            </div>
+
+            <!-- Lista de resultados -->
+
+            <div
+                id="resultados-barbearia"
+                aria-live="polite"
+            ></div>
+
+            <!-- Informações da barbearia -->
+
+            <div
+                id="info-barbearia"
+                class="form-container"
+                hidden
+            >
+
+                <h3>Barbearia Selecionada</h3>
+
+                <p>
+                    <strong>Nome:</strong>
+                    <span id="nome-barbearia"></span>
+                </p>
+
+                <p>
+                    <strong>Endereço:</strong>
+                    <span id="endereco-barbearia"></span>
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Etapa 2: Selecionar serviço -->
+
+        <section
+            id="etapa-servico"
+            aria-labelledby="titulo-servico"
+            hidden
+        >
+
+            <h2 id="titulo-servico">
+                Etapa 2: Selecionar Serviço
+            </h2>
+
+            <div class="form-container">
+
+                <label for="select-servico">
+                    Serviço disponível
+                </label>
+
+                <select
+                    id="select-servico"
+                    aria-label="Selecione o serviço"
+                >
+                    <option value="">
+                        Selecione um serviço
+                    </option>
+                </select>
+
+            </div>
+
+        </section>
+
+        <!-- Etapa 3: Selecionar data -->
+
+        <section
+            id="etapa-data"
+            aria-labelledby="titulo-data"
+            hidden
+        >
+
+            <h2 id="titulo-data">
+                Etapa 3: Selecionar Data
+            </h2>
+
+            <div class="form-container">
+
+                <label for="input-data">
+                    Data do agendamento
+                </label>
+
+                <input
+                    type="date"
+                    id="input-data"
+                    aria-label="Selecione a data do agendamento"
+                >
+
+                <button
+                    type="button"
+                    id="btn-buscar-horarios"
+                    aria-label="Buscar horários disponíveis"
+                >
+                    Ver horários
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- Etapa 4: Selecionar horário -->
+
+        <section
+            id="etapa-horario"
+            aria-labelledby="titulo-horario"
+            hidden
+        >
+
+            <h2 id="titulo-horario">
+                Etapa 4: Selecionar Horário
+            </h2>
+
+            <div class="form-container">
+
+                <label for="select-horario">
+                    Horário disponível
+                </label>
+
+                <select
+                    id="select-horario"
+                    aria-label="Selecione o horário"
+                >
+                    <option value="">
+                        Selecione um horário
+                    </option>
+                </select>
+
+                <small>
+                    Apenas horários disponíveis serão exibidos.
+                </small>
+
+            </div>
+
+        </section>
+
+        <!-- Etapa 5: Forma de pagamento -->
+
+        <section
+            id="etapa-pagamento"
+            aria-labelledby="titulo-pagamento"
+            hidden
+        >
+
+            <h2 id="titulo-pagamento">
+                Etapa 5: Forma de Pagamento
+            </h2>
+
+            <div class="form-container">
+
+                <label for="select-pagamento">
+                    Forma de pagamento
+                </label>
+
+                <select
+                    id="select-pagamento"
+                    aria-label="Selecione a forma de pagamento"
+                >
+                    <option value="">
+                        Selecione uma forma de pagamento
+                    </option>
+
+                    <option value="dinheiro">
+                        Dinheiro
+                    </option>
+
+                    <option value="pix">
+                        Pix
+                    </option>
+
+                    <option value="cartao_credito">
+                        Cartão de Crédito
+                    </option>
+
+                    <option value="cartao_debito">
+                        Cartão de Débito
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+        <!-- Etapa 6: Resumo e confirmação -->
+
+        <section
+            id="etapa-resumo"
+            aria-labelledby="titulo-resumo"
+            hidden
+        >
+
+            <h2 id="titulo-resumo">
+                Etapa 6: Resumo do Agendamento
+            </h2>
+
+            <div class="form-container">
+
+                <p>
+                    <strong>Barbearia:</strong>
+                    <span id="resumo-barbearia"></span>
+                </p>
+
+                <p>
+                    <strong>Endereço:</strong>
+                    <span id="resumo-endereco"></span>
+                </p>
+
+                <p>
+                    <strong>Serviço:</strong>
+                    <span id="resumo-servico"></span>
+                </p>
+
+                <p>
+                    <strong>Preço:</strong>
+                    <span id="resumo-preco"></span>
+                </p>
+
+                <p>
+                    <strong>Data:</strong>
+                    <span id="resumo-data"></span>
+                </p>
+
+                <p>
+                    <strong>Horário:</strong>
+                    <span id="resumo-horario"></span>
+                </p>
+
+                <p>
+                    <strong>Pagamento:</strong>
+                    <span id="resumo-pagamento"></span>
+                </p>
+
+            </div>
+
+            <!-- Formulário oculto -->
+
+            <form
+                action="/cliente/agendar"
+                method="POST"
+                id="form-agendar"
+                aria-label="Formulário de confirmação do agendamento"
+            >
+
+                <input
+                    type="hidden"
+                    name="barbeiro_id"
+                    id="hidden-barbeiro"
+                >
+
+                <input
+                    type="hidden"
+                    name="servico_id"
+                    id="hidden-servico"
+                >
+
+                <input
+                    type="hidden"
+                    name="data_agendamento"
+                    id="hidden-data"
+                >
+
+                <input
+                    type="hidden"
+                    name="hora_agendamento"
+                    id="hidden-horario"
+                >
+
+                <input
+                    type="hidden"
+                    name="metodo_pagamento"
+                    id="hidden-pagamento"
+                >
+
+                <button
+                    type="submit"
+                    aria-label="Confirmar agendamento"
+                >
+                    Confirmar Agendamento
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/agendar.js" defer></script>
+
+</body>
+</html>

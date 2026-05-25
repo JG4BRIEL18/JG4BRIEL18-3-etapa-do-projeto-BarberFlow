@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <%- include('../partials/navbar_cliente') %>
+
+    <main aria-label="Conteúdo principal do dashboard">
+
+        <!-- Boas-vindas -->
+        <section aria-labelledby="titulo-boas-vindas">
+            <h2 id="titulo-boas-vindas">Painel do Cliente</h2>
+            <p>Bem-vindo, <strong><%= nome %></strong>!</p>
+        </section>
+
+        <!-- Próximo agendamento -->
+        <section aria-labelledby="titulo-proximo">
+            <h2 id="titulo-proximo">Próximo Agendamento</h2>
+
+            <% if (!proximo) { %>
+                <p>Você não possui agendamentos futuros.</p>
+                <a href="/cliente/agendar" class="botao" aria-label="Ir para agendar um corte">Agendar agora</a>
+            <% } else { %>
+                <p>Barbearia: <strong><%= proximo.barbearia %></strong></p>
+                <p>Serviço: <strong><%= proximo.servico %></strong></p>
+                <p>Data: <strong><%= new Date(proximo.data_agendamento).toLocaleDateString('pt-BR') %></strong></p>
+                <p>Horário: <strong><%= proximo.hora_agendamento %></strong></p>
+                <p>Status: <strong><%= proximo.status %></strong></p>
+
+                <a href="/cliente/agendar" class="botao" 
+                aria-label="Ir para agendar um novo corte">Agendar novo corte</a>
+            <% } %>
+        </section>
+
+        <!-- Histórico de agendamentos -->
+        <section aria-labelledby="titulo-historico">
+            <h2 id="titulo-historico">Histórico de Agendamentos</h2>
+
+            <% if (historico.length === 0) { %>
+                <p>Nenhum agendamento encontrado.</p>
+            <% } else { %>
+
+                <div class="table-container">
+                    <table>
+                        <caption>Histórico de agendamentos do cliente</caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Barbearia</th>
+                                <th scope="col">Serviço</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Horário</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% historico.forEach(function(ag) { %>
+                                <tr>
+                                    <td><%= ag.barbearia %></td>
+                                    <td><%= ag.servico %></td>
+                                    <td><%= new Date(ag.data_agendamento).toLocaleDateString('pt-BR') %></td>
+                                    <td><%= ag.hora_agendamento %></td>
+                                    <td><%= ag.status %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            <% } %>
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

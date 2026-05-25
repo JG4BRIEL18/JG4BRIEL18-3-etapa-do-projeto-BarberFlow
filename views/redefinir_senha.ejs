@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('partials/header') %>
+
+<body>
+
+    <%- include('partials/navbar_public') %>
+
+    <main aria-label="Redefinir senha">
+
+        <section aria-label="Formulário de redefinição de senha">
+            <h2>Redefinir senha</h2>
+
+            <div class="form-container">
+                <form action="/redefinir-senha" method="POST">
+
+                    <% if (typeof erro !== 'undefined' && erro) { %>
+                        <p class="mensagem-erro"><%= erro %></p>
+                    <% } %>
+
+                    <input type="hidden" name="token" value="<%= token %>">
+
+                    <label for="novaSenha">Nova senha</label>
+                    <input
+                        type="password"
+                        id="novaSenha"
+                        name="novaSenha"
+                        required
+                        minlength="6"
+                        aria-label="Digite a nova senha"
+                    >
+                    <small>A senha precisa ter pelo menos 6 caracteres</small>
+
+                    <label for="confirmarSenha">Confirmar nova senha</label>
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        name="confirmarSenha"
+                        required
+                        minlength="6"
+                        aria-label="Confirme a nova senha"
+                    >
+
+                    <button type="submit" aria-label="Redefinir senha">
+                        Redefinir senha
+                    </button>
+
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

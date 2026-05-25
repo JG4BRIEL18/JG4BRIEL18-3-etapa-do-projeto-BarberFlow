@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('partials/header') %>
+
+<body>
+
+    <%- include('partials/navbar_public') %>
+
+    <main>
+
+        <section class="form-container">
+            <h2>Cadastro de Barbeiro</h2>
+
+            <!-- Mensagem de erro -->
+
+            <% if (erro) { %>
+                <p class="mensagem-erro"><%= erro %></p>
+            <% } %>
+
+            <form method="POST" action="/cadastro/barbeiro" aria-label="Formulário de cadastro de barbeiro">
+
+                <label for="nome">Nome do barbeiro</label>
+                <input 
+                    type="text" 
+                    id="nome" 
+                    name="nome" 
+                    placeholder="Digite seu nome" 
+                    required
+                    aria-label="Campo de nome do barbeiro">
+
+                <label for="barbearia">Nome da barbearia</label>
+                <input 
+                    type="text" 
+                    id="barbearia" 
+                    name="barbearia" 
+                    placeholder="Nome da sua barbearia" 
+                    required
+                    aria-label="Campo de nome da barbearia">
+
+                <label for="endereco">Endereço</label>
+                <input 
+                    type="text" 
+                    id="endereco" 
+                    name="endereco" 
+                    placeholder="Digite o endereço" 
+                    required
+                    aria-label="Campo de endereço da barbearia">
+
+                <label for="emailCadastro">Email</label>
+                <input 
+                    type="email" 
+                    id="emailCadastro" 
+                    name="email" 
+                    placeholder="Digite seu email" 
+                    required
+                    aria-label="Campo de email">
+
+                <label for="senhaCadastro">Senha</label>
+                <input 
+                    type="password" 
+                    id="senhaCadastro" 
+                    name="senha" 
+                    placeholder="Crie uma senha" 
+                    required 
+                    minlength="8"
+                    aria-label="Campo de senha">
+                <small>Mínimo de 8 caracteres</small>
+
+                <label for="confirmarSenha">Confirmar senha</label>
+                <input 
+                    type="password" 
+                    id="confirmarSenha" 
+                    name="confirmarSenha" 
+                    placeholder="Digite novamente a senha" 
+                    required 
+                    minlength="8"
+                    aria-label="Campo de confirmação de senha">
+                <small>Digite a mesma senha novamente</small>
+
+                <button type="submit" aria-label="Cadastrar como barbeiro">Cadastrar</button>
+
+            </form>
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

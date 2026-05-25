@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('partials/header') %>
+
+<body>
+
+    <%- include('partials/navbar_public') %>
+
+    <main aria-label="Login">
+
+        <section aria-label="Formulário de login">
+            <h2>Entrar na conta</h2>
+
+            <div class="form-container">
+
+                <% if (erro) { %>
+                    <p class="mensagem-erro"><%= erro %></p>
+                <% } %>
+
+                <form method="POST" action="/login" aria-label="Formulário de login">
+
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu email"
+                        required
+                        autocomplete="email"
+                        aria-label="Campo de email">
+                    <small>Digite um email válido (exemplo@email.com)</small>
+
+                    <label for="senha">Senha</label>
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required
+                        minlength="6"
+                        autocomplete="current-password"
+                        aria-label="Campo de senha">
+                    <small>A senha precisa ter pelo menos 6 caracteres</small>
+
+                    <button type="submit" aria-label="Entrar na conta">Entrar</button>
+
+                </form>
+
+                <a class="botao" href="/esqueci-senha" 
+                aria-label="Recuperar senha esquecida">Esqueci a senha</a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('partials/header') %>
+
+<body>
+
+    <%- include('partials/navbar_public') %>
+
+    <main aria-label="Conteúdo principal">
+
+        <section aria-label="Sobre o BarberFlow">
+            <h2>O que é o BarberFlow?</h2>
+            <p>O BarberFlow é um sistema de agendamento online para barbearias...</p>
+        </section>
+
+        <section aria-label="Como funciona o BarberFlow">
+            <h2>Como funciona?</h2>
+
+            <h3>Clientes</h3>
+            <p>Clientes podem escolher um horário disponível...</p>
+
+            <h3>Barbeiros</h3>
+            <p>Barbeiros podem visualizar os horários agendados...</p>
+        </section>
+
+        <section aria-label="Começar a usar o BarberFlow">
+            <h2>Começar</h2>
+            <p>Para utilizar o sistema, faça login ou crie uma conta.</p>
+            <a class="botao" href="/login" aria-label="Ir para a página de login">Ir para Login</a>
+            <a class="botao" href="/cadastro" aria-label="Ir para a página de cadastro">Ir para Cadastro</a>
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

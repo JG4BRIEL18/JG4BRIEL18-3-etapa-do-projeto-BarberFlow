@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('partials/header') %>
+
+<body>
+
+    <%- include('partials/navbar_public') %>
+
+    <main>
+
+        <section class="form-container">
+            <h2>Escolha o tipo de cadastro</h2>
+            <p>Selecione como você deseja usar o BarberFlow:</p>
+
+            <div style="display:flex; flex-direction:column; gap:15px; margin-top:20px;">
+
+                <a href="/cadastro/cliente" class="botao" aria-label="Cadastrar como cliente">
+                    Sou Cliente
+                </a>
+
+                <a href="/cadastro/barbeiro" class="botao" aria-label="Cadastrar como barbeiro">
+                    Sou Barbeiro
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

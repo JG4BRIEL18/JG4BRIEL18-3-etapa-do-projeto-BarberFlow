@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <%- include('../partials/navbar_barbeiro') %>
+
+    <main aria-label="Conteúdo principal da agenda">
+
+        <!-- Voltar -->
+
+        <button
+            class="botao"
+            type="button"
+            onclick="history.back()"
+            aria-label="Voltar para página anterior"
+        >
+            Voltar
+        </button>
+
+        <!-- Título -->
+        <section aria-labelledby="titulo-agenda">
+            <h2 id="titulo-agenda">Agenda</h2>
+            <p>Gerencie seus agendamentos, confirme, cancele, conclua ou remarque quando necessário.</p>
+        </section>
+
+        <!-- Lista de agendamentos -->
+        <section aria-labelledby="titulo-agendamentos">
+            <h2 id="titulo-agendamentos">Próximos Agendamentos</h2>
+
+            <% if (agendamentos.length === 0) { %>
+                <p>Nenhum agendamento encontrado.</p>
+            <% } else { %>
+
+                <div class="table-container">
+                    <table>
+                        <caption>Lista de agendamentos futuros</caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Serviço</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Horário</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% agendamentos.forEach(function(ag) { %>
+                                <tr>
+                                    <td><%= ag.cliente %></td>
+                                    <td><%= ag.servico %></td>
+                                    <td><%= new Date(ag.data_agendamento).toLocaleDateString('pt-BR') %></td>
+                                    <td><%= ag.hora_agendamento %></td>
+                                    <td><%= ag.status %></td>
+                                    <td>
+
+                                        <!-- Confirmar (apenas se pendente) -->
+                                        <% if (ag.status === 'pendente') { %>
+                                            <form action="/barbeiro/agenda/confirmar/<%= ag.id %>" 
+                                                method="POST" aria-label="Confirmar agendamento de <%= ag.cliente %>">
+                                                <button type="submit" 
+                                                aria-label="Confirmar agendamento de <%= ag.cliente %>">Confirmar</button>
+                                            </form>
+                                        <% } %>
+
+                                        <!-- Concluir (apenas se confirmado) -->
+                                        <% if (ag.status === 'confirmado') { %>
+                                            <form action="/barbeiro/agenda/concluir/<%= ag.id %>" 
+                                                method="POST" aria-label="Concluir agendamento de <%= ag.cliente %>">
+                                                <button type="submit" 
+                                                aria-label="Concluir agendamento de <%= ag.cliente %>">Concluir</button>
+                                            </form>
+                                        <% } %>
+
+                                        <!-- Cancelar (apenas se pendente ou confirmado) -->
+                                        <% if (ag.status === 'pendente' || ag.status === 'confirmado') { %>
+                                            <form action="/barbeiro/agenda/cancelar/<%= ag.id %>" 
+                                                method="POST" aria-label="Cancelar agendamento de <%= ag.cliente %>">
+                                                <button type="submit" 
+                                                aria-label="Cancelar agendamento de <%= ag.cliente %>">Cancelar</button>
+                                            </form>
+                                        <% } %>
+
+                                        <!-- Remarcar (apenas se pendente ou confirmado) -->
+                                        <% if (ag.status === 'pendente' || ag.status === 'confirmado') { %>
+                                            <form action="/barbeiro/agenda/remarcar/<%= ag.id %>" method="POST" 
+                                                aria-label="Remarcar agendamento de <%= ag.cliente %>">
+
+                                                <label for="data-<%= ag.id %>">Nova data</label>
+                                                <input type="date" id="data-<%= ag.id %>" name="data_agendamento" 
+                                                required aria-required="true">
+
+                                                <label for="hora-<%= ag.id %>">Novo horário</label>
+                                                <input type="time" id="hora-<%= ag.id %>" name="hora_agendamento" 
+                                                required aria-required="true">
+
+                                                <button type="submit" 
+                                                aria-label="Remarcar agendamento de <%= ag.cliente %>">Remarcar</button>
+
+                                            </form>
+                                        <% } %>
+
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            <% } %>
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <%- include('../partials/navbar_barbeiro') %>
+
+    <main aria-label="Tutorial do barbeiro">
+
+        <section aria-label="Introdução ao tutorial">
+            <h2>Como usar o BarberFlow</h2>
+            <p>Siga o passo a passo abaixo para aprender o que é cada parte do site, configurar e usar o sistema.</p>
+        </section>
+
+        <section aria-label="Etapa 1 do tutorial">
+            <h2>Etapa 1 — <span>Dashboard</span></h2>
+            <p>O Dashboard é a tela principal após o login. Nela você encontra um resumo rápido da sua barbearia.</p>
+            <img
+                src="/img/tutorial/etapa1barb.png"
+                alt="Print da tela referente à etapa 1"
+                width="800"
+            >
+        </section>
+
+        <section aria-label="Etapa 2 do tutorial">
+            <h2>Etapa 2 — <span>Agenda</span></h2>
+            <p>Aqui é onde fica sua agenda. Nela você pode confirmar, remarcar ou cancelar os agendamentos.</p>
+            <img
+                src="/img/tutorial/etapa2barb.png"
+                alt="Print da tela referente à etapa 2"
+                width="800"
+            >
+        </section>
+
+        <section aria-label="Etapa 3 do tutorial">
+            <h2>Etapa 3 — <span>Serviços: Configuração dos cortes e Dias de funcionamento</span></h2>
+            <p>Aqui você pode adicionar ou remover os cortes e configurar os preços. 
+                E você configura os dias que sua barbearia vai ficar aberta.</p>
+            <img
+                src="/img/tutorial/etapa3barb.png"
+                alt="Print da tela referente à etapa 3"
+                width="800"
+            >
+        </section>
+
+        <section aria-label="Etapa 4 do tutorial">
+            <h2>Etapa 4 — <span>Perfil</span></h2>
+            <p>Aqui você edita seus dados pessoais, da barbearia e altera a senha.</p>
+            <img
+                src="/img/tutorial/etapa4barb.png"
+                alt="Print da tela referente à etapa 4"
+                width="800"
+            >
+        </section>
+
+        <section aria-label="Etapa 5 do tutorial">
+            <h2>Etapa 5 — <span>Conta</span></h2>
+            <p>Aqui você pode sair de sua conta ou excluir.</p>
+            <img
+                src="/img/tutorial/etapa5barb.png"
+                alt="Print da tela referente à etapa 5"
+                width="800"
+            >
+        </section>
+
+        <section aria-label="Etapa 6 do tutorial">
+            <h2>Etapa 6 — <span>Modo noturno</span></h2>
+            <p>No canto superior esquerdo você pode ativar o modo escuro do site.</p>
+            <img
+                src="/img/tutorial/etapa6barb.png"
+                alt="Print da tela referente à etapa 6"
+                width="800"
+            >
+        </section>
+
+        <section aria-label="Finalizar tutorial">
+            <p>Pronto! Agora você já sabe como usar o BarberFlow.</p>
+            <a class="botao" href="/barbeiro/servicos" aria-label="Ir para a página de serviços">Configurar meus serviços</a>
+            <a class="botao" href="/barbeiro/dashboard_barb" aria-label="Ir para o dashboard">Voltar para o Dashboard</a>
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

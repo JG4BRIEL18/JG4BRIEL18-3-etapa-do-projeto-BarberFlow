@@ -1,306 +1,590 @@
 /* Fonte */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* cores */
-:root{
-    --bege:#f5e6d3;
-    --marrom:#3b2a1f;
-    --marrom-claro:#6b4b3e;
+/* ── VARIÁVEIS ───────────────────────────────────── */
+:root {
+    --bege: #f5e6d3;
+    --marrom: #3b2a1f;
+    --marrom-claro: #6b4b3e;
+    --marrom-hover: #2e201a;
+    --branco: #ffffff;
+    --sombra: rgba(59, 42, 31, 0.12);
+    --sombra-hover: rgba(59, 42, 31, 0.22);
+    --borda-radius: 10px;
+    --transicao: 0.25s ease;
+    --transicao-lenta: 0.4s ease;
 }
 
-/* reset simples */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ── RESET ───────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* corpo */
-body{
-    font-family:"Poppins", sans-serif;
-    background:var(--bege);
-    color:var(--marrom);
-    line-height:1.6;
+/* ── CORPO ───────────────────────────────────────── */
+body {
+    font-family: "Poppins", sans-serif;
+    background: var(--bege);
+    color: var(--marrom);
+    line-height: 1.6;
+    font-size: 15px;
+    transition: background var(--transicao-lenta), color var(--transicao-lenta);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* header */
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px;
-    background:var(--marrom);
-    color:white;
-    border-bottom:3px solid #cccccc;
+/* ── HEADER ──────────────────────────────────────── */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 28px;
+    background: var(--marrom);
+    color: white;
+    border-bottom: 3px solid var(--marrom-claro);
+    box-shadow: 0 2px 12px var(--sombra);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background var(--transicao-lenta), box-shadow var(--transicao);
 }
 
-/* logo + título */
-.logo-area{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-    color:white;
+/* ── LOGO ────────────────────────────────────────── */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: white;
+    transition: opacity var(--transicao);
 }
 
-.logo-area img{
-    width:80px;
-    height:80px;
-    object-fit:cover;
-    border-radius:8px;
+.logo-area:hover {
+    opacity: 0.88;
 }
 
-/* nav */
-nav a{
-    margin-right:15px;
-    color:white;
-    text-decoration:underline;
-    transition:opacity 0.2s ease;
+.logo-area img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    transition: transform var(--transicao);
 }
 
-nav a:hover{
-    opacity:0.8;
+.logo-area:hover img {
+    transform: scale(1.05);
 }
 
-/* botão dark mode */
-#darkToggle{
-    background:var(--marrom-claro);
-    color:white;
-    border:none;
-    padding:8px 12px;
-    cursor:pointer;
-    border-radius:6px;
-    transition:opacity 0.2s ease;
+.logo-area h1 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-#darkToggle:hover{
-    opacity:0.85;
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
 }
 
-/* main */
-main{
-    padding:40px 20px;
-    max-width:900px;
-    margin:auto;
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background var(--transicao), opacity var(--transicao);
+    position: relative;
 }
 
-/* seções */
-section{
-    margin-bottom:40px;
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 12px;
+    right: 12px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform var(--transicao);
 }
 
-h2{
-    margin-bottom:10px;
+nav a:hover::after {
+    transform: scaleX(1);
 }
 
-p{
-    margin-bottom:10px;
+nav a:hover {
+    background: rgba(255,255,255,0.12);
 }
 
-/* botão principal */
-.botao{
-    display:inline-block;
-    background:var(--marrom);
-    color:white;
-    padding:10px 15px;
-    border-radius:6px;
-    text-decoration:underline;
-    margin-top:10px;
-    transition:opacity 0.2s ease;
+/* ── BOTÃO DARK MODE ─────────────────────────────── */
+#darkToggle {
+    background: var(--marrom-claro);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao);
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.botao:hover{
-    opacity:0.85;
+#darkToggle:hover {
+    background: var(--marrom-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* formulário */
-.form-container{
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    margin-bottom:30px;
-    border:2px solid var(--marrom-claro);
+#darkToggle:active {
+    transform: translateY(0);
 }
 
-/* estrutura do formulário */
-form{
-    display:flex;
-    flex-direction:column;
+/* ── MAIN ────────────────────────────────────────── */
+main {
+    padding: 48px 24px;
+    max-width: 920px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+    animation: fadeUp 0.45s ease both;
 }
 
-label{
-    margin-top:10px;
-    font-weight:700;
-}
-
-input{
-    padding:10px;
-    margin-top:5px;
-    border:1px solid var(--marrom);
-    border-radius:6px;
-}
-
-small{
-    font-size:12px;
-    margin-bottom:10px;
-}
-
-/* botão formulário */
-button{
-    margin-top:15px;
-    padding:10px;
-    border:none;
-    background:var(--marrom);
-    color:white;
-    cursor:pointer;
-    border-radius:6px;
-    transition:opacity 0.2s ease;
-}
-
-button:hover{
-    opacity:0.85;
-}
-
-/* foco acessível */
-a:focus,
-button:focus,
-input:focus{
-    outline:3px solid orange;
-    outline-offset:2px;
-}
-
-/* footer ou rodapé */
-footer{
-    background:var(--marrom);
-    color:white;
-    padding:20px;
-    text-align:center;
-    margin-top:40px;
-}
-
-.footer-links a{
-    display:block;
-    color:white;
-    text-decoration:underline;
-    margin-top:5px;
-}
-
-/* responsivo */
-@media (max-width:700px){
-
-    header{
-        flex-direction:column;
-        gap:10px;
-        text-align:center;
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
     }
-
-    nav{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:5px;
-    }
-
-    nav a{
-        margin-right:0;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* dark mode */
-body.dark{
-    background:#121212;
-    color:white;
+/* ── SEÇÕES ──────────────────────────────────────── */
+section {
+    margin-bottom: 44px;
 }
 
-body.dark header{
-    background:#000;
+h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.2px;
 }
 
-body.dark footer{
-    background:#000;
+h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 16px;
 }
 
-body.dark .form-container{
-    background:#1e1e1e;
-    color:white;
+p {
+    margin-bottom: 10px;
+    color: inherit;
 }
 
-
-/* testes */
-
-
-/* dashboard_barb*/
-.table-container{
-    overflow-x:auto;
+/* ── BOTÃO PRINCIPAL ─────────────────────────────── */
+.botao {
+    display: inline-block;
+    background: var(--marrom);
+    color: white;
+    padding: 10px 20px;
+    border-radius: var(--borda-radius);
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: 0 3px 10px var(--sombra);
+    transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao);
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
+.botao:hover {
+    background: var(--marrom-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--sombra-hover);
 }
 
-th, td{
-    border:1px solid var(--marrom);
-    padding:10px;
-    text-align:left;
+.botao:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px var(--sombra);
 }
 
-th{
-    background:var(--marrom-claro);
-    color:white;
+/* ── FORMULÁRIO ──────────────────────────────────── */
+.form-container {
+    background: var(--branco);
+    padding: 32px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+    border: 1.5px solid rgba(107, 75, 62, 0.25);
+    box-shadow: 0 4px 20px var(--sombra);
+    transition: background var(--transicao-lenta), border-color var(--transicao), box-shadow var(--transicao);
 }
 
-/*extra*/
-/* =========================
-   MODAL
-========================= */
-.modal{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-
-    display:none;
-    justify-content:center;
-    align-items:center;
+.form-container:hover {
+    box-shadow: 0 8px 28px var(--sombra-hover);
 }
 
-.modal.open{
-    display:flex;
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-.modal-content{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    width:300px;
+label {
+    margin-top: 14px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.2px;
 }
 
-/* =========================
-   MODO EDIÇÃO
-========================= */
-.modo-edicao td:last-child{
-    visibility:visible;
+input,
+select,
+textarea {
+    padding: 10px 14px;
+    margin-top: 6px;
+    border: 1.5px solid rgba(59, 42, 31, 0.3);
+    border-radius: var(--borda-radius);
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    background: var(--branco);
+    color: var(--marrom);
+    transition: border-color var(--transicao), box-shadow var(--transicao), background var(--transicao-lenta);
 }
 
-td:last-child{
-    visibility:hidden;
+input:hover,
+select:hover {
+    border-color: var(--marrom-claro);
 }
 
-/* =========================
-   BOTÃO
-========================= */
-#btnGerenciar{
-    margin-bottom:15px;
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--marrom);
+    box-shadow: 0 0 0 3px rgba(59, 42, 31, 0.15);
+    outline: none;
 }
 
-/* =========================
-   DARK MODE
-========================= */
-body.dark .modal-content{
-    background:#1e1e1e;
-    color:white;
+small {
+    font-size: 11.5px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    opacity: 0.7;
+}
+
+/* ── BOTÃO FORMULÁRIO ────────────────────────────── */
+button {
+    margin-top: 18px;
+    padding: 11px 18px;
+    border: none;
+    background: var(--marrom);
+    color: white;
+    cursor: pointer;
+    border-radius: var(--borda-radius);
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: 0 3px 10px var(--sombra);
+    transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao);
+}
+
+button:hover {
+    background: var(--marrom-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--sombra-hover);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px var(--sombra);
+}
+
+/* ── FOCO ACESSÍVEL ──────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid orange;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ── FOOTER ──────────────────────────────────────── */
+footer {
+    background: var(--marrom);
+    color: white;
+    padding: 28px 24px;
+    text-align: center;
+    margin-top: auto;
+    box-shadow: 0 -2px 12px var(--sombra);
+    transition: background var(--transicao-lenta);
+}
+
+footer p {
+    margin-bottom: 6px;
+    font-size: 0.875rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 18px;
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: underline;
+    font-size: 0.825rem;
+    transition: color var(--transicao), opacity var(--transicao);
+}
+
+.footer-links a:hover {
+    color: white;
+    opacity: 1;
+}
+
+/* ── TABELA ──────────────────────────────────────── */
+.table-container {
+    overflow-x: auto;
+    border-radius: var(--borda-radius);
+    box-shadow: 0 3px 14px var(--sombra);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: var(--branco);
+    border-radius: var(--borda-radius);
+    overflow: hidden;
+}
+
+th, td {
+    border-bottom: 1px solid rgba(59, 42, 31, 0.12);
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+th {
+    background: var(--marrom-claro);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    font-size: 0.825rem;
+    text-transform: uppercase;
+}
+
+tr {
+    transition: background var(--transicao);
+}
+
+tbody tr:hover {
+    background: rgba(245, 230, 211, 0.5);
+}
+
+/* ── BOTÕES DENTRO DE TABELA ─────────────────────── */
+td button {
+    margin-top: 4px;
+    margin-right: 4px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+td form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+/* ── MENSAGENS ───────────────────────────────────── */
+.mensagem-erro {
+    background: #ffdada;
+    color: #7a0000;
+    border: 1.5px solid #ffb3b3;
+    padding: 12px 16px;
+    border-radius: var(--borda-radius);
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    animation: fadeUp 0.3s ease both;
+}
+
+.mensagem-sucesso {
+    background: #d6ffdb;
+    color: #0f4a1a;
+    border: 1.5px solid #86efac;
+    padding: 12px 16px;
+    border-radius: var(--borda-radius);
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    animation: fadeUp 0.3s ease both;
+}
+
+/* ── CARDS ───────────────────────────────────────── */
+.card {
+    background: var(--branco);
+    border-radius: 14px;
+    padding: 24px;
+    border: 1.5px solid rgba(107, 75, 62, 0.18);
+    box-shadow: 0 3px 14px var(--sombra);
+    transition: transform var(--transicao), box-shadow var(--transicao), background var(--transicao-lenta);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px var(--sombra-hover);
+}
+
+/* ── RESPONSIVO ──────────────────────────────────── */
+@media (max-width: 700px) {
+    header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    nav a {
+        padding: 5px 10px;
+        font-size: 0.825rem;
+    }
+
+    main {
+        padding: 32px 16px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .botao {
+        display: block;
+        text-align: center;
+        margin-right: 0;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* ── DARK MODE ───────────────────────────────────── */
+body.dark {
+    background: #121212;
+    color: white;
+}
+
+body.dark header {
+    background: #000;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.5);
+}
+
+body.dark footer {
+    background: #000;
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.5);
+}
+
+body.dark .form-container {
+    background: #1e1e1e;
+    color: white;
+    border-color: rgba(107, 75, 62, 0.4);
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea {
+    background: #1e1e1e;
+    color: white;
+    border-color: rgba(107, 75, 62, 0.5);
+}
+
+body.dark input:hover,
+body.dark select:hover {
+    border-color: var(--marrom-claro);
+}
+
+body.dark input:focus,
+body.dark select:focus,
+body.dark textarea:focus {
+    border-color: var(--marrom-claro);
+    box-shadow: 0 0 0 3px rgba(107, 75, 62, 0.25);
+}
+
+body.dark table {
+    background: #1e1e1e;
+}
+
+body.dark th {
+    background: var(--marrom);
+}
+
+body.dark td {
+    border-color: var(--marrom-claro);
+    color: white;
+}
+
+body.dark tbody tr:hover {
+    background: rgba(59, 42, 31, 0.4);
+}
+
+body.dark .card {
+    background: #1e1e1e;
+    border-color: rgba(107, 75, 62, 0.35);
+    color: white;
+}
+
+body.dark .mensagem-erro {
+    background: #3d1515;
+    color: #ffb3b3;
+    border-color: #7a0000;
+}
+
+body.dark .mensagem-sucesso {
+    background: #0f2e15;
+    color: #86efac;
+    border-color: #166534;
+}
+
+body.dark .botao {
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+body.dark button {
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+body.dark nav a:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+body.dark .table-container {
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
 }

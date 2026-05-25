@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <% if (session && session.user) { %>
+
+        <% if (session.user.tipo === 'cliente') { %>
+            <%- include('../partials/navbar_cliente') %>
+        <% } %>
+
+        <% if (session.user.tipo === 'barbeiro') { %>
+            <%- include('../partials/navbar_barbeiro') %>
+        <% } %>
+
+    <% } else { %>
+
+        <%- include('../partials/navbar_public') %>
+
+    <% } %>
+
+    <main aria-label="Conteúdo de suporte">
+
+        <!-- Título -->
+        <section aria-label="Título da página">
+            <h2>Suporte</h2>
+            <p>Precisa de ajuda? Veja algumas informações abaixo.</p>
+        </section>
+
+        <!-- Ajuda -->
+        <section aria-label="Ajuda com login">
+            <h3>Problemas de login</h3>
+            <p>Verifique se o email e senha foram digitados corretamente.</p>
+        </section>
+
+        <!-- Agendamento -->
+        <section aria-label="Ajuda com agendamento">
+            <h3>Agendamentos</h3>
+            <p>Clientes podem visualizar e confirmar agendamentos pela área do sistema.</p>
+        </section>
+
+        <!-- Contato -->
+        <section aria-label="Contato">
+            <h3>Contato</h3>
+            <p>Email: suporte@barberflow.com</p>
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

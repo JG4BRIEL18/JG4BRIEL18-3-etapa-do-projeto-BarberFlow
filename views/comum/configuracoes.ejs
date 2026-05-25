@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <% if (session && session.user) { %>
+
+        <% if (session.user.tipo === 'cliente') { %>
+            <%- include('../partials/navbar_cliente') %>
+        <% } %>
+
+        <% if (session.user.tipo === 'barbeiro') { %>
+            <%- include('../partials/navbar_barbeiro') %>
+        <% } %>
+
+    <% } else { %>
+
+        <%- include('../partials/navbar_public') %>
+
+    <% } %>
+
+    <main aria-label="Página de configurações da conta">
+
+        <!-- Conta -->
+
+        <section aria-label="Configurações da conta">
+
+            <h2>Conta</h2>
+
+            <div class="form-container">
+
+                <p>
+                    Gerencie sua conta e sessões do BarberFlow.
+                </p>
+
+                <!-- Sair da conta -->
+
+                <a
+                    class="botao"
+                    href="/logout"
+                    aria-label="Sair da conta"
+                >
+                    Sair da conta
+                </a>
+
+                <!-- Excluir conta -->
+
+                <form
+                    action="/excluir-conta"
+                    method="POST"
+                >
+
+                    <button
+                        type="submit"
+                        aria-label="Excluir conta permanentemente"
+                    >
+                        Excluir conta
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- Aparência -->
+
+        <section aria-label="Configurações de aparência">
+
+            <h2>Aparência</h2>
+
+            <div class="form-container">
+
+                <p>
+                    Utilize o botão de modo noturno no topo da página para alternar o tema.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Ajuda e suporte -->
+
+        <section aria-label="Ajuda e suporte">
+
+            <h2>Ajuda e Suporte</h2>
+
+            <div class="form-container">
+
+                <!-- Links úteis -->
+
+                <nav aria-label="Links de ajuda">
+
+                    <a
+                        class="botao"
+                        href="/comum/suporte"
+                        aria-label="Ir para suporte"
+                    >
+                        Suporte
+                    </a>
+
+                    <a
+                        class="botao"
+                        href="/comum/acessibilidade"
+                        aria-label="Ir para declaração de acessibilidade"
+                    >
+                        Acessibilidade
+                    </a>
+
+                    <a
+                        class="botao"
+                        href="/comum/termos"
+                        aria-label="Ir para termos de uso"
+                    >
+                        Termos de uso
+                    </a>
+
+                    <a
+                        class="botao"
+                        href="/comum/privacidade"
+                        aria-label="Ir para política de privacidade"
+                    >
+                        Política de privacidade
+                    </a>
+
+                </nav>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

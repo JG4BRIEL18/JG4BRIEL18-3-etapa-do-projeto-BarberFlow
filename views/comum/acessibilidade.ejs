@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <% if (session && session.user) { %>
+
+        <% if (session.user.tipo === 'cliente') { %>
+            <%- include('../partials/navbar_cliente') %>
+        <% } %>
+
+        <% if (session.user.tipo === 'barbeiro') { %>
+            <%- include('../partials/navbar_barbeiro') %>
+        <% } %>
+
+    <% } else { %>
+
+        <%- include('../partials/navbar_public') %>
+
+    <% } %>
+
+    <main aria-label="Conteúdo de acessibilidade">
+
+        <!-- Título -->
+        <section aria-label="Título da página">
+            <h2>Declaração de Acessibilidade</h2>
+            <p>O BarberFlow busca oferecer uma experiência acessível para todos os usuários.</p>
+        </section>
+
+        <!-- Recursos -->
+        <section aria-label="Recursos de acessibilidade">
+            <h3>Recursos de acessibilidade</h3>
+            <p>O sistema possui foco visível, navegação por teclado e contraste adequado.</p>
+        </section>
+
+        <!-- Compatibilidade -->
+        <section aria-label="Compatibilidade com tecnologias assistivas">
+            <h3>Compatibilidade</h3>
+            <p>As páginas foram estruturadas utilizando HTML semântico e atributos de acessibilidade.</p>
+        </section>
+
+        <!-- Melhorias -->
+        <section aria-label="Melhorias futuras">
+            <h3>Melhorias contínuas</h3>
+            <p>O BarberFlow continuará recebendo melhorias para aumentar a acessibilidade da plataforma.</p>
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

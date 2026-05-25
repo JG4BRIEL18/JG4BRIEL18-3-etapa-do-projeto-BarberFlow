@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <% if (session && session.user) { %>
+
+        <% if (session.user.tipo === 'cliente') { %>
+            <%- include('../partials/navbar_cliente') %>
+        <% } %>
+
+        <% if (session.user.tipo === 'barbeiro') { %>
+            <%- include('../partials/navbar_barbeiro') %>
+        <% } %>
+
+    <% } else { %>
+
+        <%- include('../partials/navbar_public') %>
+
+    <% } %>
+
+    <main aria-label="Conteúdo dos termos de uso">
+
+        <!-- Título -->
+        <section aria-label="Título da página">
+            <h2>Termos de Uso</h2>
+            <p>Leia atentamente os termos de utilização da plataforma BarberFlow.</p>
+        </section>
+
+        <!-- Uso da plataforma -->
+        <section aria-label="Uso da plataforma">
+            <h3>Uso da plataforma</h3>
+            <p>O BarberFlow é uma plataforma de agendamento online para clientes e barbeiros.</p>
+            <p>Ao utilizar o sistema, o usuário concorda em usar a plataforma de forma responsável.</p>
+        </section>
+
+        <!-- Responsabilidades -->
+        <section aria-label="Responsabilidades dos usuários">
+            <h3>Responsabilidades</h3>
+            <p>Clientes e barbeiros são responsáveis pelas informações cadastradas na plataforma.</p>
+            <p>Agendamentos cancelados ou alterados devem seguir as regras da barbearia.</p>
+        </section>
+
+        <!-- Conta -->
+        <section aria-label="Segurança da conta">
+            <h3>Segurança da conta</h3>
+            <p>O usuário é responsável pela segurança do email e senha utilizados no BarberFlow.</p>
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

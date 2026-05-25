@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<%- include('../partials/header') %>
+
+<body>
+
+    <%- include('../partials/navbar_barbeiro') %>
+
+    <main aria-label="Página de perfil do barbeiro">
+
+        <!-- Informações pessoais -->
+
+        <section aria-label="Informações pessoais">
+
+            <h2>Meu Perfil</h2>
+
+            <div class="form-container">
+
+                <!-- Formulário de atualização de dados -->
+
+                <form action="/barbeiro/perfil/atualizar" method="POST">
+
+                    <!-- Nome -->
+
+                    <label for="nome">Nome completo</label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        value="<%= usuario.nome %>"
+                        required
+                        aria-label="Digite seu nome completo"
+                    >
+
+                    <!-- Email -->
+
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="<%= usuario.email %>"
+                        required
+                        aria-label="Digite seu email"
+                    >
+
+                    <!-- Barbearia -->
+
+                    <label for="barbearia">Nome da barbearia</label>
+
+                    <input
+                        type="text"
+                        id="barbearia"
+                        name="barbearia"
+                        value="<%= barbearia.barbearia %>"
+                        required
+                        aria-label="Digite o nome da barbearia"
+                    >
+
+                    <!-- Endereço -->
+
+                    <label for="endereco">Endereço</label>
+
+                    <input
+                        type="text"
+                        id="endereco"
+                        name="endereco"
+                        value="<%= barbearia.endereco %>"
+                        required
+                        aria-label="Digite o endereço da barbearia"
+                    >
+
+                    <!-- Botão salvar -->
+
+                    <button type="submit" aria-label="Salvar alterações do perfil">
+                        Salvar alterações
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- Alteração de senha -->
+
+        <section aria-label="Alteração de senha">
+
+            <h2>Alterar Senha</h2>
+
+            <div class="form-container">
+
+                <!-- Formulário de alteração de senha -->
+
+                <form action="/barbeiro/perfil/senha" method="POST">
+
+                    <!-- Senha atual -->
+
+                    <label for="senhaAtual">Senha atual</label>
+
+                    <input
+                        type="password"
+                        id="senhaAtual"
+                        name="senhaAtual"
+                        required
+                        aria-label="Digite sua senha atual"
+                    >
+
+                    <!-- Nova senha -->
+
+                    <label for="novaSenha">Nova senha</label>
+
+                    <input
+                        type="password"
+                        id="novaSenha"
+                        name="novaSenha"
+                        required
+                        aria-label="Digite sua nova senha"
+                    >
+
+                    <!-- Confirmar nova senha -->
+
+                    <label for="confirmarSenha">Confirmar nova senha</label>
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        name="confirmarSenha"
+                        required
+                        aria-label="Confirme sua nova senha"
+                    >
+
+                    <!-- Botão atualizar senha -->
+
+                    <button type="submit" aria-label="Atualizar senha">
+                        Atualizar senha
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

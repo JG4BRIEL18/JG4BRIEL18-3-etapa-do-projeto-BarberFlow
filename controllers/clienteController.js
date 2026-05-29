@@ -268,7 +268,7 @@ async function confirmarAgendamento(req, res) {
 
     } catch (err) {
         console.error('Erro ao confirmar agendamento:', err);
-        res.send('Erro ao confirmar agendamento');
+        res.render('cliente/agendar', { erro: 'Erro ao confirmar agendamento', sucesso: null });
     }
 }
 

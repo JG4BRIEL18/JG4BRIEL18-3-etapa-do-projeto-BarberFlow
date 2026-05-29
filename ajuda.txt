@@ -1,0 +1,16 @@
+Rodar o projeto no terminal:
+node server.js 
+ou 
+npm start
+
+Parar projeto no terminal:
+ctrl + c
+
+
+link do site:
+http://localhost:3000
+
+
+testar conexão:
+
+node config/teste-db.js

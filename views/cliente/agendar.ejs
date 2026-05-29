@@ -28,7 +28,7 @@
 
         <!-- Mensagem de sucesso -->
 
-        <% if (sucesso) { %>
+        <% if (typeof sucesso !== 'undefined' && sucesso) { %>
             <p class="mensagem-sucesso"><%= sucesso %></p>
         <% } %>
 
